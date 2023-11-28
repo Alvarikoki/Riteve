@@ -104,7 +104,7 @@ public class Revision implements Estado {
     }
 
     @Override
-    public void desaprobado() {
+    public void reprobado() {
         this.desaprobado = false;
     }
 }

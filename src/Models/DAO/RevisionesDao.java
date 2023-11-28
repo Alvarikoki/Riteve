@@ -1,9 +1,9 @@
-package RITEVE.DAOS;
+package Models.DAO;
 
 /**
  *
  * @author David Duarte Garcia
  */
-public class TecnicosDao {
+public class RevisionesDao {
     
 }

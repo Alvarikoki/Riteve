@@ -1,9 +1,9 @@
-package RITEVE.DTOS;
+package Models.DAO;
 
 /**
  *
  * @author David Duarte Garcia
  */
-public class VehiculosDto {
+public class CitasDao {
     
 }

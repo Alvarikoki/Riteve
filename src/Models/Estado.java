@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package Models;
 
 /**
  *
- * @author maryc
+ * @author Álvaro Álvarez R
  */
 public interface Estado {
-         public void aprobado();
-    public void desaprobado();
+    public void aprobado();
+    public void reprobado();
 }

@@ -5,7 +5,6 @@ import Models.DTO.TecnicoDto;
 import Models.Tecnico;
 import Views.FrmTecnicos;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,8 +24,10 @@ public class TecnicoController implements CRUD<Tecnico>{
         if (dao.read(obj.getId())==null){
             TecnicoDto dto = new TecnicoDto(obj.getId(),obj.getNombre(),obj.getFechaNacimiento(),obj.getTelefono(),obj.getEmail(),obj.getSalario(),obj.getPassword());
             dao.add(dto);
+            frm.msj("Se agregó correctamente", 1);
             return true;
         }else{
+            frm.msj("Usuario ya existente", 2);
             return false;
         }
     }
@@ -47,8 +48,15 @@ public class TecnicoController implements CRUD<Tecnico>{
     }
 
     @Override
-    public boolean delete(Tecnico obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean delete(String id) {
+        if(dao.read(id)!=null){
+            dao.delete(id);
+            frm.msj("Se eliminó correctamente", 1);
+            return true;
+        }else{
+            frm.msj("No se encontró el tecnico", 2);
+            return false;
+        }
     }
     
     

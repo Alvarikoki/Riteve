@@ -11,5 +11,5 @@ public interface CRUD <Class> {
     public Class read(String id);
     public List<Class> readAll();
     public boolean update(Class obj);
-    public boolean delete(Class obj);
+    public boolean delete(String id);
 }

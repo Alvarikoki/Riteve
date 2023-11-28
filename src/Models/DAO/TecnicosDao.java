@@ -62,8 +62,16 @@ public class TecnicosDao implements CRUD<TecnicoDto>{
     }
 
     @Override
-    public boolean delete(TecnicoDto obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean delete(String id) {
+        if(this.read(id)!=null){
+        DaoBD bd = new DaoBD();
+        bd.createStatement("DELETE FROM tecnicos WHERE id=?");
+        bd.set(1, id);
+        bd.execute(false);
+        return true;
+        }else{
+            return false;
+        }
     }
     
 }

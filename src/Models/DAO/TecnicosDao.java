@@ -4,7 +4,7 @@ import Controller.CRUD;
 import Models.DTO.TecnicoDto;
 import java.sql.SQLException;
 import java.sql.Date;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -52,13 +52,50 @@ public class TecnicosDao implements CRUD<TecnicoDto>{
     }
 
     @Override
-    public List<TecnicoDto> readAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ArrayList<TecnicoDto> readAll() {
+        DaoBD bd = new DaoBD();
+        bd.createStatement("Select * from tecnicos");
+        bd.execute(true);
+        ArrayList<TecnicoDto> array = new ArrayList();
+        try {
+            while (bd.getData().next()){
+                String id = bd.getData().getString(1);
+                String name = bd.getData().getString(2);
+                Date fecha = bd.getData().getDate(3);
+                String tel = bd.getData().getString(4);
+                String correo = bd.getData().getString(5);
+                Double salario = bd.getData().getDouble(6);
+                int contra = bd.getData().getInt(7);
+                TecnicoDto dto = new TecnicoDto(id,name,fecha,tel,correo,salario,contra);
+                array.add(dto);
+            }
+            return array;
+        } catch (SQLException ex) {
+            return null;
+        }
     }
 
     @Override
     public boolean update(TecnicoDto obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (this.read(obj.getId()) != null) {
+        // Crear una nueva instancia de DaoBD
+        DaoBD bd = new DaoBD();
+
+        // Crear la sentencia SQL UPDATE
+        bd.createStatement("UPDATE tecnicos SET nombre=?, telefono=?, email=?, salario=?, contra=? WHERE id=?");
+
+        // Establecer los valores de los parámetros en la sentencia preparada
+        bd.set(1, obj.getNombre());
+        bd.set(2, obj.getTelefono());
+        bd.set(3, obj.getEmail());
+        bd.set(4, obj.getSalario());
+        bd.set(5, obj.getPassword());
+        bd.set(6, obj.getId());
+        bd.execute(false);
+        return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

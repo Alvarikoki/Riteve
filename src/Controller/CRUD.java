@@ -1,6 +1,6 @@
 package Controller;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -9,7 +9,7 @@ import java.util.List;
 public interface CRUD <Class> {
     public boolean add(Class obj);
     public Class read(String id);
-    public List<Class> readAll();
+    public ArrayList<Class> readAll();
     public boolean update(Class obj);
     public boolean delete(String id);
 }

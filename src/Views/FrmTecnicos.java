@@ -4,6 +4,7 @@ import Controller.TecnicoController;
 import Models.Tecnico;
 import java.sql.Date;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 
 /**
@@ -20,6 +21,7 @@ public class FrmTecnicos extends javax.swing.JFrame {
     public FrmTecnicos() {
         initComponents();
         controller = new TecnicoController(this);
+
     }
     
     public void msj(String msj, int tipo){
@@ -36,7 +38,10 @@ public class FrmTecnicos extends javax.swing.JFrame {
         txtTel.setText(obj.getTelefono());
         txtCorreo.setText(obj.getEmail());
         txtSalario.setText(String.valueOf(obj.getSalario()));
+        txtContra.setText("");
         spin.setValue(obj.getFechaNacimiento());
+        revalidate();
+        repaint();
     }
 
     /**
@@ -248,7 +253,7 @@ public class FrmTecnicos extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         Object valorSeleccionado = spin.getValue();
         if(txtName.getText().isEmpty()||txtId.getText().isEmpty()||txtContra.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this, "Faltan datos", "Error", JOptionPane.QUESTION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Faltan datos", "Error", JOptionPane.ERROR_MESSAGE);
         }else{
             if (valorSeleccionado instanceof java.util.Date) {
                 java.util.Date fechaUtil = (java.util.Date) valorSeleccionado;
@@ -270,15 +275,41 @@ public class FrmTecnicos extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         controller.delete(txtId.getText());
+        txtName.setText("");
+        txtId.setText("");
+        txtTel.setText("");
+        txtCorreo.setText("");
+        txtSalario.setText("");
+        txtContra.setText("");
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        int pass = txtContra.getText().hashCode();
+        if(controller.read(txtId.getText()).getPassword()==pass){
+            Object valorSeleccionado = spin.getValue();
+                if(txtName.getText().isEmpty()||txtId.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(this, "Faltan datos", "Error", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    if (valorSeleccionado instanceof java.util.Date) {
+                    java.util.Date fechaUtil = (java.util.Date) valorSeleccionado;
+                    java.sql.Date fechaSQL = new java.sql.Date(fechaUtil.getTime());
+                    Tecnico tc = new Tecnico(txtId.getText(),txtName.getText(),fechaSQL,txtTel.getText(),txtCorreo.getText(),Double.parseDouble(txtSalario.getText()),txtContra.getText());
+                    controller.update(tc);
+                    }
+                }
+        }else{
+            JOptionPane.showMessageDialog(this, "Ingrese su contraseña de registro", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        FrmBuscarTecnico frm2 = new FrmBuscarTecnico();
-        frm2.setVisible(true);
+        if(controller.readAll().size()>0){
+            FrmBuscarTecnico frm2 = new FrmBuscarTecnico();
+            frm2.setFrm(this);
+            frm2.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "No hay datos por mostrar", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed

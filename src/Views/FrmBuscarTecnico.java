@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Date;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -27,13 +28,13 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
     
     public FrmBuscarTecnico() {
         initComponents();
-        frm = new FrmTecnicos();
         controller = new TecnicoController(this);
-        controller.readAll();
+        this.mostrarTodo();
         
     }
     
-    public void mostrarTodo(ArrayList<TecnicoDto> array) {
+    public void mostrarTodo() {
+        ArrayList<Tecnico> array = controller.readAll();
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
         model.addColumn("Nombre");
@@ -42,12 +43,18 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
         model.addColumn("Correo");
         model.addColumn("Salario");
         
-        for (TecnicoDto dto : array){
+        for (Tecnico dto : array){
             Object[] fila = {dto.getId(),dto.getNombre(),dto.getFechaNacimiento(),dto.getTelefono(),dto.getEmail(),dto.getSalario()};
             model.addRow(fila);
         }
         table.setModel(model);
     }
+
+    public void setFrm(FrmTecnicos frm) {
+        this.frm = frm;
+    }
+    
+    
     
 
     /**
@@ -62,10 +69,8 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
         jFrame1 = new javax.swing.JFrame();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
-        txtName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnSi = new javax.swing.JButton();
@@ -97,11 +102,14 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(table);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("Nombre");
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("ID");
+
+        txtId.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtIdKeyReleased(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
         jLabel3.setText("TECNICOS");
@@ -129,7 +137,7 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,11 +145,7 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(58, 58, 58)
                 .addComponent(jLabel4)
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -160,13 +164,9 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jLabel4)))
@@ -204,8 +204,7 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
                 Tecnico tec = new Tecnico(id,nombre,fecha,tel,correo,salario,10);
                 frm.llenarCampos(tec);
                 txtId.setText(id);
-                txtName.setText(nombre);
-                frm.setVisible(true);
+                //frm.setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(this,"Selecciona un campo", "Error",JOptionPane.ERROR_MESSAGE);
             }        
@@ -214,6 +213,18 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
     private void btnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnNoActionPerformed
+
+    private void txtIdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdKeyReleased
+        String id = txtId.getText();
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        for (int i = 0; i < table.getRowCount(); i++) {
+            String idd = table.getValueAt(i, 0).toString();
+            if(id.equals(idd)){
+            table.setRowSelectionInterval(i, i);
+            return;
+        }
+    }
+    }//GEN-LAST:event_txtIdKeyReleased
 
     /**
      * @param args the command line arguments
@@ -254,13 +265,11 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
     private javax.swing.JButton btnNo;
     private javax.swing.JButton btnSi;
     private javax.swing.JFrame jFrame1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table;
     private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }

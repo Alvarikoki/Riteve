@@ -46,18 +46,24 @@ public class TecnicoController implements CRUD<Tecnico>{
             Tecnico tc = new Tecnico(dto.getId(),dto.getNombre(),dto.getFechaNacimiento(),dto.getTelefono(),dto.getEmail(),dto.getSalario(),dto.getPassword());
             return tc;
         }else{
-            frm.msj("No se encontró el técnico, asegurate de poner el 'ID' correcto", 2);
             return null;
         }
     }
 
     @Override
     public ArrayList<Tecnico> readAll() {
-        ArrayList array = dao.readAll();
-        if (array!=null){
-            frm2.mostrarTodo(array);
+        ArrayList<TecnicoDto> arrayDto = dao.readAll();
+        ArrayList<Tecnico> array = new ArrayList();
+        if(arrayDto!=null){
+            for(TecnicoDto dto : arrayDto){
+                Tecnico tc = new Tecnico(dto.getId(),dto.getNombre(),dto.getFechaNacimiento(),dto.getTelefono(),dto.getEmail(),dto.getSalario(),dto.getPassword());
+                array.add(tc);
+            }
+            return array;
+        }else{
+            frm.msj("No hay datos por mostrar", 2);
+            return null;
         }
-        return array;
     }
 
     @Override
@@ -76,9 +82,14 @@ public class TecnicoController implements CRUD<Tecnico>{
     @Override
     public boolean delete(String id) {
         if(dao.read(id)!=null){
+            if( (this.readAll().size())>1){
             dao.delete(id);
             frm.msj("Se eliminó correctamente", 1);
             return true;
+            }else{
+                frm.msj("No se puede eliminar el técnico ya que, debe existir al menos uno.", 2);
+                return false;
+            }
         }else{
             frm.msj("No se encontró el tecnico", 2);
             return false;

@@ -79,13 +79,12 @@ public class TecnicosDao implements CRUD<TecnicoDto>{
     public boolean update(TecnicoDto obj) {
         if (this.read(obj.getId()) != null) {
         DaoBD bd = new DaoBD();
-        bd.createStatement("UPDATE tecnicos SET nombre=?, telefono=?, email=?, salario=?, contra=? WHERE id=?");
+        bd.createStatement("UPDATE tecnicos SET nombre=?, telefono=?, correo=?, salario=? WHERE id=?");
         bd.set(1, obj.getNombre());
         bd.set(2, obj.getTelefono());
         bd.set(3, obj.getEmail());
         bd.set(4, obj.getSalario());
-        bd.set(5, obj.getPassword());
-        bd.set(6, obj.getId());
+        bd.set(5, obj.getId());
         bd.execute(false);
         return true;
         } else {

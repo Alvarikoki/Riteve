@@ -240,11 +240,13 @@ public class FrmTecnicos extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         Object valorSeleccionado = spin.getValue();
-        if (valorSeleccionado instanceof java.util.Date) {
-            java.util.Date fechaUtil = (java.util.Date) valorSeleccionado;
-            java.sql.Date fechaSQL = new java.sql.Date(fechaUtil.getTime());
-        Tecnico tc = new Tecnico(txtId.getText(),txtName.getText(),fechaSQL,txtTel.getText(),txtCorreo.getText(),Double.parseDouble(txtSalario.getText()),txtContra.getText());
-        controller.add(tc);
+        if(txtName.getText().isEmpty()){
+            if (valorSeleccionado instanceof java.util.Date) {
+                java.util.Date fechaUtil = (java.util.Date) valorSeleccionado;
+                java.sql.Date fechaSQL = new java.sql.Date(fechaUtil.getTime());
+                Tecnico tc = new Tecnico(txtId.getText(),txtName.getText(),fechaSQL,txtTel.getText(),txtCorreo.getText(),Double.parseDouble(txtSalario.getText()),txtContra.getText());
+                controller.add(tc);
+            }
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 

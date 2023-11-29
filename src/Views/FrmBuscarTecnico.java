@@ -27,6 +27,7 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
     
     public FrmBuscarTecnico() {
         initComponents();
+        frm = new FrmTecnicos();
         controller = new TecnicoController(this);
         controller.readAll();
         
@@ -201,8 +202,9 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
                 Double salario = Double.valueOf(table.getValueAt(row, 5).toString());
                 Tecnico tec = new Tecnico(id,nombre,fecha,tel,correo,salario,10);
                 frm.llenarCampos(tec);
+                JOptionPane.showMessageDialog(this,"Se trasladaron los datos", "Notificación",JOptionPane.INFORMATION_MESSAGE);
             }else{
-                JOptionPane.showMessageDialog(this, "No se seleccionó ningun campo");
+                JOptionPane.showMessageDialog(this,"Se trasladaron los datos", "Notificación",JOptionPane.INFORMATION_MESSAGE);
             }        
         
     }//GEN-LAST:event_btnSiActionPerformed

@@ -14,7 +14,7 @@ public class TecnicosDao implements CRUD<TecnicoDto>{
 
     @Override
     public boolean add(TecnicoDto obj) {
-        if(obj==null) return false;
+       if(obj==null) return false;
        DaoBD bd = new DaoBD();
        bd.createStatement("Insert into tecnicos values(?,?,?,?,?,?,?)");
        bd.set(1, obj.getId());
@@ -78,13 +78,8 @@ public class TecnicosDao implements CRUD<TecnicoDto>{
     @Override
     public boolean update(TecnicoDto obj) {
         if (this.read(obj.getId()) != null) {
-        // Crear una nueva instancia de DaoBD
         DaoBD bd = new DaoBD();
-
-        // Crear la sentencia SQL UPDATE
         bd.createStatement("UPDATE tecnicos SET nombre=?, telefono=?, email=?, salario=?, contra=? WHERE id=?");
-
-        // Establecer los valores de los parámetros en la sentencia preparada
         bd.set(1, obj.getNombre());
         bd.set(2, obj.getTelefono());
         bd.set(3, obj.getEmail());

@@ -119,6 +119,11 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
 
         btnNo.setForeground(new java.awt.Color(255, 51, 51));
         btnNo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/cruz.png"))); // NOI18N
+        btnNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -128,12 +133,8 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(58, 58, 58)
                 .addComponent(jLabel4)
                 .addGap(45, 45, 45)
@@ -202,12 +203,17 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
                 Double salario = Double.valueOf(table.getValueAt(row, 5).toString());
                 Tecnico tec = new Tecnico(id,nombre,fecha,tel,correo,salario,10);
                 frm.llenarCampos(tec);
-                JOptionPane.showMessageDialog(this,"Se trasladaron los datos", "Notificación",JOptionPane.INFORMATION_MESSAGE);
+                txtId.setText(id);
+                txtName.setText(nombre);
+                frm.setVisible(true);
             }else{
-                JOptionPane.showMessageDialog(this,"Se trasladaron los datos", "Notificación",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Selecciona un campo", "Error",JOptionPane.ERROR_MESSAGE);
             }        
-        
     }//GEN-LAST:event_btnSiActionPerformed
+
+    private void btnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnNoActionPerformed
 
     /**
      * @param args the command line arguments

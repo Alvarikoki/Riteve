@@ -192,6 +192,9 @@
           <Image iconType="3" name="/Icon/cruz.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

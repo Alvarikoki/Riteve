@@ -4,6 +4,7 @@ import Models.DAO.TecnicosDao;
 import Models.DTO.TecnicoDto;
 import Models.Tecnico;
 import Views.FrmBuscarTecnico;
+import Views.FrmContra;
 import Views.FrmTecnicos;
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 public class TecnicoController implements CRUD<Tecnico>{
     private FrmTecnicos frm;
     private FrmBuscarTecnico frm2;
+    private FrmContra contra;
     private TecnicosDao dao;
 
     public TecnicoController(FrmTecnicos frm) {
@@ -23,6 +25,11 @@ public class TecnicoController implements CRUD<Tecnico>{
     
     public TecnicoController(FrmBuscarTecnico frm2){
         this.frm2 = frm2;
+        dao = new TecnicosDao();
+    }
+    
+    public TecnicoController(FrmContra contra){
+        this.contra = contra;
         dao = new TecnicosDao();
     }
 
@@ -92,6 +99,15 @@ public class TecnicoController implements CRUD<Tecnico>{
             }
         }else{
             frm.msj("No se encontró el tecnico", 2);
+            return false;
+        }
+    }
+    
+    public boolean updatePassword(int password, String id){
+        if(dao.read(id)!=null){
+            dao.updatePassword(password, id);
+            return true;
+        }else{
             return false;
         }
     }

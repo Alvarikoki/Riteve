@@ -285,20 +285,24 @@ public class FrmTecnicos extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         int pass = txtContra.getText().hashCode();
-        if(controller.read(txtId.getText()).getPassword()==pass){
-            Object valorSeleccionado = spin.getValue();
-                if(txtName.getText().isEmpty()||txtId.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(this, "Faltan datos", "Error", JOptionPane.ERROR_MESSAGE);
-                }else{
-                    if (valorSeleccionado instanceof java.util.Date) {
-                    java.util.Date fechaUtil = (java.util.Date) valorSeleccionado;
-                    java.sql.Date fechaSQL = new java.sql.Date(fechaUtil.getTime());
-                    Tecnico tc = new Tecnico(txtId.getText(),txtName.getText(),fechaSQL,txtTel.getText(),txtCorreo.getText(),Double.parseDouble(txtSalario.getText()),txtContra.getText());
-                    controller.update(tc);
+        if(controller.read(txtId.getText()) != null){
+            if(controller.read(txtId.getText()).getPassword()==pass){
+                Object valorSeleccionado = spin.getValue();
+                    if(txtName.getText().isEmpty()||txtId.getText().isEmpty()){
+                        JOptionPane.showMessageDialog(this, "Faltan datos", "Error", JOptionPane.ERROR_MESSAGE);
+                    }else{
+                        if (valorSeleccionado instanceof java.util.Date) {
+                        java.util.Date fechaUtil = (java.util.Date) valorSeleccionado;
+                        java.sql.Date fechaSQL = new java.sql.Date(fechaUtil.getTime());
+                        Tecnico tc = new Tecnico(txtId.getText(),txtName.getText(),fechaSQL,txtTel.getText(),txtCorreo.getText(),Double.parseDouble(txtSalario.getText()),txtContra.getText());
+                        controller.update(tc);
+                        }
                     }
-                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Ingrese su contraseña de registro", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }else{
-            JOptionPane.showMessageDialog(this, "Ingrese su contraseña de registro", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Id no registrado", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -318,6 +322,7 @@ public class FrmTecnicos extends javax.swing.JFrame {
         txtTel.setText("");
         txtCorreo.setText("");
         txtSalario.setText("");
+        txtContra.setText("");
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     /**

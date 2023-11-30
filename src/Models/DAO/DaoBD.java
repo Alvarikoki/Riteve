@@ -21,22 +21,23 @@ public class DaoBD {
         }
     }
     
-    private void connect(){
-        try {
-            this.connection=DriverManager.getConnection("jdbc:mysql://localhost/rtv", "java","123");
-        } catch (SQLException ex) {
-            System.out.println("Error al conectar  "+ ex.toString());
-        }
+ private void connect() {
+    try {
+        this.connection = DriverManager.getConnection("jdbc:mysql://localhost/riteve", "java", "123");
+        System.out.println("Conexión exitosa");
+    } catch (SQLException ex) {
+        System.out.println("Error al conectar: " + ex.toString());
     }
+}
+
+
     
     public void createStatement(String sql){
         try {
             this.statement=(PreparedStatement) this.connection.prepareStatement(sql);
         } catch (SQLException ex) {
             System.out.println("error al ejecutar la sentencia"+ ex.toString());
-        }
-        
-       
+        } 
     }
     
     public void set(int index, Object param){

@@ -16,7 +16,7 @@ public class TecnicosDao implements CRUD<TecnicoDto>{
     public boolean add(TecnicoDto obj) {
        if(obj==null) return false;
        DaoBD bd = new DaoBD();
-       bd.createStatement("Insert into tecnicos values(?,?,?,?,?,?,?)");
+       bd.createStatement("{call TecnicosInsert(?,?,?,?,?,?,?)}");
        bd.set(1, obj.getId());
        bd.set(2, obj.getNombre());
        bd.set(3, obj.getFechaNacimiento());

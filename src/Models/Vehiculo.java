@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Models;
 
 /**
@@ -9,7 +5,9 @@ package Models;
  * @author maryc
  */
 import java.sql.Date;
+
 public class Vehiculo {
+
     private String placa;
     private String marca;
     private String modelo;
@@ -17,8 +15,9 @@ public class Vehiculo {
     private String id;
     private String nombre;
     private int antiguedad;
+    private int annio;
 
-    public Vehiculo(String placa, String marca, String modelo, Date fechaInscripcion, String id, String nombre, int antiguedad) {
+    public Vehiculo(String placa, String marca, String modelo, Date fechaInscripcion, String id, String nombre, int antiguedad, int annio) {
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
@@ -26,9 +25,9 @@ public class Vehiculo {
         this.id = id;
         this.nombre = nombre;
         this.antiguedad = antiguedad;
+        this.annio = annio;
     }
 
-    
     public String getPlaca() {
         return placa;
     }
@@ -84,6 +83,13 @@ public class Vehiculo {
     public void setAntiguedad(int antiguedad) {
         this.antiguedad = antiguedad;
     }
-    
-    
+
+    public int getAnnio() {
+        return annio;
+    }
+
+    public void setAnnio(int annio) {
+        this.annio = annio;
+    }
+
 }

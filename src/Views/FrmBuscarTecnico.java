@@ -7,9 +7,11 @@ package Views;
 import Controller.TecnicoController;
 import Models.DTO.TecnicoDto;
 import Models.Tecnico;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Date;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
@@ -54,6 +56,19 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
         this.frm = frm;
     }
     
+    public void moverArriba(int fila) {
+        if (fila >= 0 && fila < table.getRowCount()) {
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            Vector<Object> vec = new Vector<>();
+            for (int col = 0; col < model.getColumnCount(); col++) {
+                vec.add(model.getValueAt(fila, col));
+            }
+        model.removeRow(fila);
+        model.insertRow(0, vec);
+        table.setRowSelectionInterval(0, 0);
+    }
+}
+    
     
     
 
@@ -75,6 +90,7 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btnSi = new javax.swing.JButton();
         btnNo = new javax.swing.JButton();
+        btnSi1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -133,6 +149,14 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
             }
         });
 
+        btnSi1.setForeground(new java.awt.Color(153, 255, 153));
+        btnSi1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/cerrar.png"))); // NOI18N
+        btnSi1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSi1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,6 +174,8 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSi1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(104, 104, 104)
                 .addComponent(btnSi, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,7 +201,8 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnSi, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSi1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -220,11 +247,24 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
         for (int i = 0; i < table.getRowCount(); i++) {
             String idd = table.getValueAt(i, 0).toString();
             if(id.equals(idd)){
-            table.setRowSelectionInterval(i, i);
-            return;
+                this.moverArriba(i);
+            break;
+            }
         }
-    }
     }//GEN-LAST:event_txtIdKeyReleased
+
+    private void btnSi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSi1ActionPerformed
+        int row = table.getSelectedRow();
+        if (row != -1) {
+            String idd = table.getValueAt(row, 0).toString();
+            FrmContra contra = new FrmContra();
+            contra.setPass(controller.read(idd).getPassword());
+            contra.setId(idd);
+            contra.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this,"Selecciona un campo", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSi1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,6 +304,7 @@ public class FrmBuscarTecnico extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNo;
     private javax.swing.JButton btnSi;
+    private javax.swing.JButton btnSi1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -16,7 +16,9 @@ public class TecnicosDao implements CRUD<TecnicoDto>{
     public boolean add(TecnicoDto obj) {
        if(obj==null) return false;
        DaoBD bd = new DaoBD();
-       bd.createStatement("{call TecnicosInsert(?,?,?,?,?,?,?)}");
+
+
+       bd.createStatement("{CALL InsertTecnico(?, ?, ?, ?, ?, ?, ?)}");
        bd.set(1, obj.getId());
        bd.set(2, obj.getNombre());
        bd.set(3, obj.getFechaNacimiento());
@@ -30,7 +32,7 @@ public class TecnicosDao implements CRUD<TecnicoDto>{
     @Override
     public TecnicoDto read(String id) {
         DaoBD bd = new DaoBD();
-        bd.createStatement("Select * from tecnicos where ID=?");
+        bd.createStatement("{CALL SelectTecnico(?)}");
         bd.set(1, id);
         bd.execute(true);
         try {
@@ -54,7 +56,7 @@ public class TecnicosDao implements CRUD<TecnicoDto>{
     @Override
     public ArrayList<TecnicoDto> readAll() {
         DaoBD bd = new DaoBD();
-        bd.createStatement("Select * from tecnicos");
+        bd.createStatement("{CALL SelectAllTecnico()}");
         bd.execute(true);
         ArrayList<TecnicoDto> array = new ArrayList();
         try {
@@ -79,7 +81,7 @@ public class TecnicosDao implements CRUD<TecnicoDto>{
     public boolean update(TecnicoDto obj) {
         if (this.read(obj.getId()) != null) {
         DaoBD bd = new DaoBD();
-        bd.createStatement("UPDATE tecnicos SET nombre=?, telefono=?, correo=?, salario=? WHERE id=?");
+        bd.createStatement("{CALL UpdateTecnico(?,?,?,?,?)}");
         bd.set(1, obj.getNombre());
         bd.set(2, obj.getTelefono());
         bd.set(3, obj.getEmail());
@@ -91,12 +93,25 @@ public class TecnicosDao implements CRUD<TecnicoDto>{
             return false;
         }
     }
+    
+    public boolean updatePassword(int password, String id){
+        if (this.read(id) != null) {
+        DaoBD bd = new DaoBD();
+        bd.createStatement("{CALL UpdateContraseñaTecnico(?, ?)}");
+        bd.set(1, id);
+        bd.set(2, password);
+        bd.execute(false);
+        return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public boolean delete(String id) {
         if(this.read(id)!=null){
         DaoBD bd = new DaoBD();
-        bd.createStatement("DELETE FROM tecnicos WHERE id=?");
+        bd.createStatement("{CALL DeleteTecnico(?)}");
         bd.set(1, id);
         bd.execute(false);
         return true;

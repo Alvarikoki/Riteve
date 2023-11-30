@@ -14,18 +14,18 @@ public class Vehiculo {
     private Date fechaInscripcion;
     private String id;
     private String nombre;
-    private int antiguedad;
-    private int annio;
+    private int anio;
+    private int edad;
 
-    public Vehiculo(String placa, String marca, String modelo, Date fechaInscripcion, String id, String nombre, int antiguedad, int annio) {
+    public Vehiculo(String placa, String marca, String modelo, Date fechaInscripcion, String id, String nombre, int anio) {
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
         this.fechaInscripcion = fechaInscripcion;
         this.id = id;
         this.nombre = nombre;
-        this.antiguedad = antiguedad;
-        this.annio = annio;
+        this.anio = anio;
+        this.calcEdad();
     }
 
     public String getPlaca() {
@@ -76,20 +76,16 @@ public class Vehiculo {
         this.nombre = nombre;
     }
 
-    public int getAntiguedad() {
-        return antiguedad;
-    }
-
-    public void setAntiguedad(int antiguedad) {
-        this.antiguedad = antiguedad;
-    }
-
     public int getAnnio() {
-        return annio;
+        return anio;
     }
 
     public void setAnnio(int annio) {
-        this.annio = annio;
+        this.anio = annio;
+    }
+
+    public void calcEdad() {
+        this.edad = 2023 - this.anio;
     }
 
 }

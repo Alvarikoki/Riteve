@@ -4,10 +4,7 @@ import Controller.CRUD;
 import Models.DTO.VehiculosDto;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import java.sql.Date;
 /**
  *
  * @author David Duarte Garcia
@@ -20,21 +17,21 @@ public class VehiculosDao implements CRUD<VehiculosDto> {
             return false;
         }
         DaoBD bd = new DaoBD();
-        bd.createStatement("{call VehiculoInsert(?,?,?,?,?,?)}");
+        bd.createStatement("{CALL InsertVehiculo(?,?,?,?,?,?,?)}");
         bd.set(1, obj.getPlaca());
         bd.set(2, obj.getMarca());
         bd.set(3, obj.getModelo());
         bd.set(4, obj.getFechaInscripcion());
         bd.set(5, obj.getId());
         bd.set(6, obj.getNombre());
-
+        bd.set(7, obj.getAño());
         return bd.execute(false);
     }
 
     @Override
     public VehiculosDto read(String id) {
         DaoBD bd = new DaoBD();
-        bd.createStatement("Select * from vehiculos where ID=?");
+        bd.createStatement("{CALL SelectVehiculo(?)}");
         bd.set(1, id);
         bd.execute(true);
         try {
@@ -45,7 +42,8 @@ public class VehiculosDao implements CRUD<VehiculosDto> {
                 Date fechaIns = bd.getData().getDate(4);
                 String idP = bd.getData().getString(5);
                 String name = bd.getData().getString(6);
-                VehiculosDto dto = VehiculosDto(numplaca, marc, mod, fechaIns, idP, name);
+                int año = bd.getData().getInt(7);
+                VehiculosDto dto = new VehiculosDto(numplaca, marc, mod, fechaIns, idP, name, año);
             } else {
                 return null;
             }
@@ -70,8 +68,6 @@ public class VehiculosDao implements CRUD<VehiculosDto> {
         return false;
     }
 
-    private VehiculosDto VehiculosDto(String numplaca, String marc, String mod, Date fechaIns, String idP, String name) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
 }

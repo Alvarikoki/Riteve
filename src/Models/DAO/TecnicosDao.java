@@ -16,9 +16,7 @@ public class TecnicosDao implements CRUD<TecnicoDto>{
     public boolean add(TecnicoDto obj) {
        if(obj==null) return false;
        DaoBD bd = new DaoBD();
-
-
-       bd.createStatement("{CALL InsertTecnico(?, ?, ?, ?, ?, ?, ?)}");
+       bd.createStatement("{CALL TecnicosInsert(?,?,?,?,?,?,?)}");
        bd.set(1, obj.getId());
        bd.set(2, obj.getNombre());
        bd.set(3, obj.getFechaNacimiento());
@@ -32,7 +30,7 @@ public class TecnicosDao implements CRUD<TecnicoDto>{
     @Override
     public TecnicoDto read(String id) {
         DaoBD bd = new DaoBD();
-        bd.createStatement("{CALL SelectTecnico(?)}");
+        bd.createStatement("{CALL TecnicosSelect(?)}");
         bd.set(1, id);
         bd.execute(true);
         try {
@@ -56,7 +54,7 @@ public class TecnicosDao implements CRUD<TecnicoDto>{
     @Override
     public ArrayList<TecnicoDto> readAll() {
         DaoBD bd = new DaoBD();
-        bd.createStatement("{CALL SelectAllTecnico()}");
+        bd.createStatement("{CALL TecnicosSelect()}");
         bd.execute(true);
         ArrayList<TecnicoDto> array = new ArrayList();
         try {

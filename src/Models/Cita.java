@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Models;
 
 /**
@@ -9,7 +5,9 @@ package Models;
  * @author maryc
  */
 import java.sql.Date;
-public class Cita implements StatusControl{
+
+public class Cita implements StatusControl {
+
     private int id;
     private Date fecha;
     private String hora;
@@ -67,11 +65,11 @@ public class Cita implements StatusControl{
 
     @Override
     public void activate() {
-this.activate=true;
+        this.activate = true;
     }
 
     @Override
     public void desactivate() {
-    this.desactivate=false; 
+        this.desactivate = false;
     }
 }

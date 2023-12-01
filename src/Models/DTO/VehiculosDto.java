@@ -12,18 +12,18 @@ public class VehiculosDto {
     private String marca;
     private String modelo;
     private Date fechaInscripcion;
-    private String id;
-    private String nombre;
-    private int antiguedad;
+    private String idDueño;
+    private String nombreDueño;
+    private int año;
 
-    public VehiculosDto(String placa, String marca, String modelo, Date fechaInscripcion, String id, String nombre, int antiguedad) {
+    public VehiculosDto(String placa, String marca, String modelo, Date fechaInscripcion, String id, String nombre, int año) {
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
         this.fechaInscripcion = fechaInscripcion;
-        this.id = id;
-        this.nombre = nombre;
-        this.antiguedad = antiguedad;
+        this.idDueño = id;
+        this.nombreDueño = nombre;
+        this.año = año;
     }
 
     public String getPlaca() {
@@ -43,14 +43,24 @@ public class VehiculosDto {
     }
 
     public String getId() {
-        return id;
+        return idDueño;
     }
 
     public String getNombre() {
-        return nombre;
+        return nombreDueño;
     }
 
-    public int getAntiguedad() {
-        return antiguedad;
+    public String getIdDueño() {
+        return idDueño;
     }
+
+    public String getNombreDueño() {
+        return nombreDueño;
+    }
+
+    public int getAño() {
+        return año;
+    }
+    
+    
 }

@@ -26,9 +26,9 @@ public class Vehiculo {
         this.nombreDueño = nombre;
         this.año = año;
         this.calcEdad();
-        
-        
     }
+
+   
 
     public String getPlaca() {
         return placa;
@@ -82,8 +82,8 @@ public class Vehiculo {
         return año;
     }
 
-    public void setAnnio(int annio) {
-        this.año = annio;
+    public void setAño(int año) {
+        this.año = año;
     }
 
     public void calcEdad() {

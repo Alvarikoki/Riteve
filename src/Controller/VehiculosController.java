@@ -3,7 +3,7 @@ package Controller;
 import Models.DAO.VehiculosDao;
 import Models.DTO.VehiculosDto;
 import Models.Vehiculo;
-
+import Views.FrmVehiculos;
 import java.util.ArrayList;
 
 /**
@@ -12,9 +12,9 @@ import java.util.ArrayList;
  */
 public class VehiculosController implements CRUD<Vehiculo>{
     private VehiculosDao dao;
-    
-    
+    private FrmVehiculos frm;
     @Override
+    
     public boolean add(Vehiculo obj) {
           if (dao.read(obj.getId())==null){
             VehiculosDto dto = new VehiculosDto(obj.getPlaca(),obj.getMarca(),obj.getModelo(),obj.getFechaInscripcion(),obj.getId(),obj.getNombre(),obj.getAño());
@@ -23,6 +23,11 @@ public class VehiculosController implements CRUD<Vehiculo>{
         }else{
             return false;
         }
+    }
+
+    public VehiculosController(FrmVehiculos view) {
+        this.frm = view;
+        dao = new VehiculosDao();
     }
 
     @Override

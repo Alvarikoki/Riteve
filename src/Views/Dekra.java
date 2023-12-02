@@ -36,12 +36,11 @@ public class Dekra extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1230, 930));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-180, 150, 1540, 20));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-180, 150, 950, 20));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/DEKRA-removebg-preview.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 650, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 650, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Tecnico.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -49,11 +48,11 @@ public class Dekra extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 1, 18)); // NOI18N
         jLabel2.setText("TÉCNICOS");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, -1));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Cars.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -61,11 +60,11 @@ public class Dekra extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Historic", 1, 18)); // NOI18N
         jLabel3.setText("VEHICULOS");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, -1, -1));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Revision.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -73,11 +72,11 @@ public class Dekra extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Historic", 1, 18)); // NOI18N
         jLabel4.setText("REVISIONES");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Citas.png"))); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -85,11 +84,11 @@ public class Dekra extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 230, -1, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 230, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Historic", 1, 18)); // NOI18N
         jLabel5.setText("CITAS");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 200, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 200, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -100,7 +99,8 @@ public class Dekra extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     
+        FrmVehiculos frm = new FrmVehiculos();
+        frm.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

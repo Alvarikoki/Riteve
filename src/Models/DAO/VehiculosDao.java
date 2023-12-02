@@ -22,8 +22,8 @@ public class VehiculosDao implements CRUD<VehiculosDto> {
         bd.set(2, obj.getMarca());
         bd.set(3, obj.getModelo());
         bd.set(4, obj.getFechaInscripcion());
-        bd.set(5, obj.getId());
-        bd.set(6, obj.getNombre());
+        bd.set(5, obj.getIdDueño());
+        bd.set(6, obj.getNombreDueño());
         bd.set(7, obj.getAño());
         return bd.execute(false);
     }
@@ -79,7 +79,7 @@ public class VehiculosDao implements CRUD<VehiculosDto> {
 
     @Override
     public boolean update(VehiculosDto obj) {
-        if (this.read(obj.getId()) != null) {
+        if (this.read(obj.getIdDueño()) != null) {
         DaoBD bd = new DaoBD();
         bd.createStatement("{CALL UpdateTecnico(?,?,?)}");
         bd.set(1, obj.getPlaca());

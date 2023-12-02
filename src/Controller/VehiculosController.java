@@ -36,7 +36,7 @@ public class VehiculosController implements CRUD<Vehiculo> {
     public Vehiculo read(String id) {
         if (dao.read(id) != null) {
             VehiculosDto dto = dao.read(id);
-            VehiculosDto vh = new VehiculosDto(dto.getPlaca(), dto.getMarca(), dto.getModelo(), dto.getFechaInscripcion(), dto.getIdDueño(), dto.getNombreDueño(), dto.getAño());
+            Vehiculo vh = new Vehiculo(dto.getPlaca(), dto.getMarca(), dto.getModelo(), dto.getFechaInscripcion(), dto.getIdDueño(), dto.getNombreDueño(), dto.getAño());
             return vh;
         } else {
             return null;
@@ -49,7 +49,7 @@ public class VehiculosController implements CRUD<Vehiculo> {
         ArrayList<Vehiculo> array = new ArrayList();
         if (arrayDto != null) {
             for (VehiculosDto dto : arrayDto) {
-                VehiculosDto vh = new VehiculosDto(dto.getPlaca(), dto.getMarca(), dto.getModelo(), dto.getFechaInscripcion(), dto.getIdDueño(), dto.getNombreDueño(), dto.getAño());
+                Vehiculo vh = new Vehiculo(dto.getPlaca(), dto.getMarca(), dto.getModelo(), dto.getFechaInscripcion(), dto.getIdDueño(), dto.getNombreDueño(), dto.getAño());
                 array.add(vh);
             }
             return array;

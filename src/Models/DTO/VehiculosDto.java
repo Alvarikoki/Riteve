@@ -1,13 +1,12 @@
 package Models.DTO;
 
-import Models.Vehiculo;
 import java.sql.Date;
 
 /**
  *
  * @author David Duarte Garcia
  */
-public class VehiculosDto extends Vehiculo{
+public class VehiculosDto{
 
     private String placa;
     private String marca;
@@ -18,7 +17,6 @@ public class VehiculosDto extends Vehiculo{
     private int año;
 
     public VehiculosDto(String placa, String marca, String modelo, Date fechaInscripcion, String idDueño, String nombreDueño, int año) {
-        super(placa, marca, modelo, fechaInscripcion, idDueño, nombreDueño, año);
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
@@ -42,14 +40,6 @@ public class VehiculosDto extends Vehiculo{
 
     public Date getFechaInscripcion() {
         return fechaInscripcion;
-    }
-
-    public String getId() {
-        return idDueño;
-    }
-
-    public String getNombre() {
-        return nombreDueño;
     }
 
     public String getIdDueño() {

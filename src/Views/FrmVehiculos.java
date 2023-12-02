@@ -3,6 +3,7 @@ package Views;
 
 import Controller.VehiculosController;
 import Models.Vehiculo;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,7 +29,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
         txtPlaca = new javax.swing.JTextField();
         txtModelo = new javax.swing.JTextField();
         txtMarca = new javax.swing.JTextField();
@@ -42,48 +43,114 @@ public class FrmVehiculos extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel8 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        btnBuscar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JSeparator();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblVehiculos = new javax.swing.JTable();
+        btnLimpiar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/add.png"))); // NOI18N
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 245, -1, -1));
-        getContentPane().add(txtPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 146, 131, -1));
-        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, 131, -1));
-        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 146, 131, -1));
-        getContentPane().add(txtDueño, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, 131, -1));
-        getContentPane().add(txtAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(796, 146, 131, -1));
-        getContentPane().add(txtNombreDueño, new org.netbeans.lib.awtextra.AbsoluteConstraints(653, 146, 131, -1));
+        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 70, 70));
+        getContentPane().add(txtPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 131, -1));
+        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 131, -1));
+        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 131, -1));
+        getContentPane().add(txtDueño, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 131, -1));
+        getContentPane().add(txtAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 90, 131, -1));
+        getContentPane().add(txtNombreDueño, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 90, 131, -1));
 
         spinV.setModel(new javax.swing.SpinnerDateModel());
-        getContentPane().add(spinV, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 230, 150, -1));
+        getContentPane().add(spinV, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 150, -1));
 
         jLabel1.setText("Placa");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 103, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
 
-        jLabel2.setText("jLabel1");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, -1, -1));
+        jLabel2.setText("Cedula Dueño");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, -1, -1));
 
         jLabel3.setText("Marca");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, -1, -1));
 
         jLabel4.setText("Modelo");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, -1, -1));
 
         jLabel5.setText("Fecha");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 202, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, -1));
 
-        jLabel6.setText("jLabel1");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 112, -1, -1));
+        jLabel6.setText("Nombre del Dueño");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, -1, -1));
+
+        jLabel7.setText("Año");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 70, -1, -1));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 63, 930, 10));
+
+        jLabel8.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
+        jLabel8.setText("VEHÍCULOS");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, -1));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 930, 10));
+        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 123, 930, 10));
+
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/search.png"))); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, -1, 70));
+
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/update.png"))); // NOI18N
+        getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 190, -1, 70));
+        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 930, 10));
+
+        tblVehiculos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Placa", "Marca", "Modelo", "Cedula Dueño", "Nombre Dueño", "Año", "Antiguedad"
+            }
+        ));
+        jScrollPane1.setViewportView(tblVehiculos);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 930, 130));
+
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/escoba2.png"))); // NOI18N
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, -1, 70));
+
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/delete.png"))); // NOI18N
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, -1, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         Object valorSeleccionado = spinV.getValue();  
         if (valorSeleccionado instanceof java.util.Date) {
                 java.util.Date fechaUtil = (java.util.Date) valorSeleccionado;
@@ -91,8 +158,26 @@ public class FrmVehiculos extends javax.swing.JFrame {
                 //String placa, String marca, String modelo, Date fechaInscripcion, String id, String nombre, int año
                 Vehiculo vh = new Vehiculo(txtPlaca.getText(),txtMarca.getText(),txtModelo.getText(),fechaSQL,txtDueño.getText(),txtNombreDueño.getText(),Integer.parseInt(txtAño.getText()));
                 controller.add(vh);
+                JOptionPane.showMessageDialog(this, "Se agregó correctamente", "Agregado", JOptionPane.INFORMATION_MESSAGE);
             }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtPlaca.setText("");
+        txtMarca.setText("");
+        txtModelo.setText("");
+        txtDueño.setText("");
+        txtNombreDueño.setText("");
+        txtAño.setText("");
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,14 +215,26 @@ public class FrmVehiculos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSpinner spinV;
+    private javax.swing.JTable tblVehiculos;
     private javax.swing.JTextField txtAño;
     private javax.swing.JTextField txtDueño;
     private javax.swing.JTextField txtMarca;

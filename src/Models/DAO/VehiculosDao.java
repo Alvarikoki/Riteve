@@ -55,19 +55,53 @@ public class VehiculosDao implements CRUD<VehiculosDto> {
 
     @Override
     public ArrayList<VehiculosDto> readAll() {
-        return null;
+        DaoBD bd = new DaoBD();
+        bd.createStatement("{CALL TecnicosSelect()}");
+        bd.execute(true);
+        ArrayList<VehiculosDto> array = new ArrayList();
+        try {
+            while (bd.getData().next()){
+                String numplaca = bd.getData().getString(1);
+                String marc = bd.getData().getString(2);
+                String mod = bd.getData().getString(3);
+                Date fechaIns = bd.getData().getDate(4);
+                String idP = bd.getData().getString(5);
+                String name = bd.getData().getString(6);
+                int año = bd.getData().getInt(7);
+                VehiculosDto dto = new VehiculosDto(numplaca, marc, mod, fechaIns, idP, name, año);
+                array.add(dto);
+            }
+            return array;
+        } catch (SQLException ex) {
+            return null;
+        }
     }
 
     @Override
     public boolean update(VehiculosDto obj) {
-        return false;
+        if (this.read(obj.getId()) != null) {
+        DaoBD bd = new DaoBD();
+        bd.createStatement("{CALL UpdateTecnico(?,?,?)}");
+        bd.set(1, obj.getPlaca());
+        bd.set(2, obj.getNombreDueño());
+        bd.set(3, obj.getNombreDueño());
+        bd.execute(false);
+        return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public boolean delete(String id) {
-        return false;
+             if(this.read(id)!=null){
+        DaoBD bd = new DaoBD();
+        bd.createStatement("{CALL DeleteVehiculo(?)}");
+        bd.set(1, id);
+        bd.execute(false);
+        return true;
+        }else{
+            return false;
+        }
     }
-
-    
-
 }

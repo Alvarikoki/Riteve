@@ -1,12 +1,13 @@
 package Models.DTO;
 
+import Models.Vehiculo;
 import java.sql.Date;
 
 /**
  *
  * @author David Duarte Garcia
  */
-public class VehiculosDto {
+public class VehiculosDto extends Vehiculo{
 
     private String placa;
     private String marca;
@@ -16,13 +17,14 @@ public class VehiculosDto {
     private String nombreDueño;
     private int año;
 
-    public VehiculosDto(String placa, String marca, String modelo, Date fechaInscripcion, String id, String nombre, int año) {
+    public VehiculosDto(String placa, String marca, String modelo, Date fechaInscripcion, String idDueño, String nombreDueño, int año) {
+        super(placa, marca, modelo, fechaInscripcion, idDueño, nombreDueño, año);
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
         this.fechaInscripcion = fechaInscripcion;
-        this.idDueño = id;
-        this.nombreDueño = nombre;
+        this.idDueño = idDueño;
+        this.nombreDueño = nombreDueño;
         this.año = año;
     }
 

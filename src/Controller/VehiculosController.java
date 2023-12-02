@@ -10,17 +10,19 @@ import java.util.ArrayList;
  *
  * @author David Duarte Garcia
  */
-public class VehiculosController implements CRUD<Vehiculo>{
+public class VehiculosController implements CRUD<Vehiculo> {
+
     private VehiculosDao dao;
     private FrmVehiculos frm;
+
     @Override
-    
+
     public boolean add(Vehiculo obj) {
-          if (dao.read(obj.getId())==null){
-            VehiculosDto dto = new VehiculosDto(obj.getPlaca(),obj.getMarca(),obj.getModelo(),obj.getFechaInscripcion(),obj.getId(),obj.getNombre(),obj.getAño());
+        if (dao.read(obj.getIdDueño()) == null) {
+            VehiculosDto dto = new VehiculosDto(obj.getPlaca(), obj.getMarca(), obj.getModelo(), obj.getFechaInscripcion(), obj.getIdDueño(), obj.getNombreDueño(), obj.getAño());
             dao.add(dto);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -32,22 +34,53 @@ public class VehiculosController implements CRUD<Vehiculo>{
 
     @Override
     public Vehiculo read(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (dao.read(id) != null) {
+            VehiculosDto dto = dao.read(id);
+            VehiculosDto vh = new VehiculosDto(dto.getPlaca(), dto.getMarca(), dto.getModelo(), dto.getFechaInscripcion(), dto.getIdDueño(), dto.getNombreDueño(), dto.getAño());
+            return vh;
+        } else {
+            return null;
+        }
     }
 
     @Override
     public ArrayList<Vehiculo> readAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<VehiculosDto> arrayDto = dao.readAll();
+        ArrayList<Vehiculo> array = new ArrayList();
+        if (arrayDto != null) {
+            for (VehiculosDto dto : arrayDto) {
+                VehiculosDto vh = new VehiculosDto(dto.getPlaca(), dto.getMarca(), dto.getModelo(), dto.getFechaInscripcion(), dto.getIdDueño(), dto.getNombreDueño(), dto.getAño());
+                array.add(vh);
+            }
+            return array;
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean update(Vehiculo obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (dao.read(obj.getIdDueño()) != null) {
+             VehiculosDto vh = new VehiculosDto(obj.getPlaca(), obj.getMarca(), obj.getModelo(), obj.getFechaInscripcion(), obj.getIdDueño(), obj.getNombreDueño(), obj.getAño());
+            dao.update(vh);   
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public boolean delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            if(dao.read(id)!=null){
+            if( (this.readAll().size())>1){
+            dao.delete(id);
+            return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
-    
+
 }

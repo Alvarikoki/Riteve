@@ -62,19 +62,19 @@ public class Vehiculo {
         this.fechaInscripcion = fechaInscripcion;
     }
 
-    public String getId() {
+    public String getIdDueño() {
         return idDueño;
     }
 
-    public void setId(String id) {
+    public void setIdDueño(String id) {
         this.idDueño = id;
     }
 
-    public String getNombre() {
+    public String getNombreDueño() {
         return nombreDueño;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombreDueño(String nombre) {
         this.nombreDueño = nombre;
     }
 

@@ -56,7 +56,7 @@ public class VehiculosDao implements CRUD<VehiculosDto> {
     @Override
     public ArrayList<VehiculosDto> readAll() {
         DaoBD bd = new DaoBD();
-        bd.createStatement("{CALL TecnicosSelect()}");
+        bd.createStatement("{CALL SelectAllVehiculo()}");
         bd.execute(true);
         ArrayList<VehiculosDto> array = new ArrayList();
         try {
@@ -81,7 +81,7 @@ public class VehiculosDao implements CRUD<VehiculosDto> {
     public boolean update(VehiculosDto obj) {
         if (this.read(obj.getIdDueño()) != null) {
         DaoBD bd = new DaoBD();
-        bd.createStatement("{CALL UpdateTecnico(?,?,?)}");
+        bd.createStatement("{CALL UpdateVehiculo(?,?,?)}");
         bd.set(1, obj.getPlaca());
         bd.set(2, obj.getNombreDueño());
         bd.set(3, obj.getNombreDueño());

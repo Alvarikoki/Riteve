@@ -90,4 +90,9 @@ public class Vehiculo {
         this.edad = 2023 - this.año;
     }
 
+    public int getEdad() {
+        return edad;
+    }
+    
+
 }

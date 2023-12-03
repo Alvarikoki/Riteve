@@ -32,6 +32,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
         model.addColumn("Placa");
         model.addColumn("Marca");
         model.addColumn("Modelo");
+        model.addColumn("FechaInscripcion");
         model.addColumn("Antiguedad");
         model.addColumn("IdDueño");
         model.addColumn("NombreDueño");
@@ -41,6 +42,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
                 v.getPlaca(),
                 v.getMarca(),
                 v.getModelo(),
+                v.getFechaInscripcion(),
                 v.getEdad(),
                 v.getIdDueño(),
                 v.getNombreDueño(),
@@ -176,13 +178,13 @@ public class FrmVehiculos extends javax.swing.JFrame {
 
         tblVehiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Placa", "Marca", "Modelo", "Cedula Dueño", "Nombre Dueño", "Año", "Antiguedad"
+                "Placa", "Marca", "Modelo", "Cedula Dueño", "Nombre Dueño", "Año", "Antiguedad", "Fecha Inscripcion"
             }
         ));
         jScrollPane1.setViewportView(tblVehiculos);
@@ -256,7 +258,14 @@ public class FrmVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-
+        controller.delete(txtPlaca.getText());
+        txtPlaca.setText("");
+        txtMarca.setText("");
+        txtModelo.setText("");
+        txtDueño.setText("");
+        txtNombreDueño.setText("");
+        txtAño.setText("");
+       
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

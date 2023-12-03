@@ -23,8 +23,8 @@ public class DaoBD {
     
  private void connect() {
     try {
-        this.connection = DriverManager.getConnection("jdbc:mysql://localhost/riteve", "java", "123");
-        System.out.println("Conexión exitosa");
+        this.connection = DriverManager.getConnection("jdbc:mysql://localhost/dekra", "java", "123");
+        //System.out.println("Conexión exitosa");
     } catch (SQLException ex) {
         System.out.println("Error al conectar: " + ex.toString());
     }

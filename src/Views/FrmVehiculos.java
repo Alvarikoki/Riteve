@@ -1,11 +1,13 @@
 package Views;
 
 import Controller.VehiculosController;
+import Models.Hilo;
 
 import Models.Vehiculo;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
 public class FrmVehiculos extends javax.swing.JFrame {
 
     private VehiculosController controller;
+    private Hilo hl;
+    private Thread hilo;
 
     /**
      * Creates new form FrmVehiculos
@@ -24,6 +28,9 @@ public class FrmVehiculos extends javax.swing.JFrame {
         initComponents();
         controller = new VehiculosController(this);
         this.mostrarTodo();
+        hl = new Hilo(this);
+        hilo = new Thread(hl);
+        hilo.start();
     }
 
     public void mostrarTodo() {
@@ -50,7 +57,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
         }
         tblVehiculos.setModel(model);
     }
-
+    
     public void moverArriba(int fila) {
         if (fila >= 0 && fila < tblVehiculos.getRowCount()) {
             DefaultTableModel model = (DefaultTableModel) tblVehiculos.getModel();
@@ -61,6 +68,14 @@ public class FrmVehiculos extends javax.swing.JFrame {
             model.removeRow(fila);
             model.insertRow(0, vec);
             tblVehiculos.setRowSelectionInterval(0, 0);
+        }
+    }
+    
+    public void msj(String msj, int tipo){
+        if(tipo==1){
+            JOptionPane.showMessageDialog(rootPane, msj, "Notificación", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(rootPane, msj, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -256,7 +271,11 @@ public class FrmVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-
+        if (txtPlaca.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Digite la placa para eliminar");
+        }else{
+            controller.delete(txtPlaca.getText());
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

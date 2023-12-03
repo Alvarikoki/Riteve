@@ -94,13 +94,13 @@ public class VehiculosDao implements CRUD<VehiculosDto> {
 
     @Override
     public boolean delete(String id) {
-             if(this.read(id)!=null){
-        DaoBD bd = new DaoBD();
-        bd.createStatement("{CALL DeleteVehiculo(?)}");
-        bd.set(1, id);
-        bd.execute(false);
-        return true;
-        }else{
+        if (this.read(id) != null) {
+            DaoBD bd = new DaoBD();
+            bd.createStatement("{CALL DeleteVehiculo(?)}");
+            bd.set(1, id);
+            bd.execute(false);
+            return true;
+        } else {
             return false;
         }
     }

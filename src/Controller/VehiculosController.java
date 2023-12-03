@@ -71,16 +71,16 @@ public class VehiculosController implements CRUD<Vehiculo> {
 
     @Override
     public boolean delete(String id) {
-            if(dao.read(id)!=null){
-            if( (this.readAll().size())>1){
+        if(dao.read(id)!=null){
             dao.delete(id);
+            frm.msj("Se eliminó el vehiculo", 1);
             return true;
-            }else{
-                return false;
-            }
         }else{
-            return false;
-        }
+            frm.msj("No se encontró el vehiculo", 2);
+            return false; 
+            }
+            
     }
+    
 
 }

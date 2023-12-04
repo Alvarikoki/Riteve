@@ -28,8 +28,6 @@ public class Vehiculo {
         this.calcEdad();
     }
 
-   
-
     public String getPlaca() {
         return placa;
     }
@@ -92,7 +90,6 @@ public class Vehiculo {
 
     public int getEdad() {
         return edad;
-    }
-    
+    }   
 
 }

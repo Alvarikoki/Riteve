@@ -27,7 +27,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
      */
     public FrmVehiculos() {
         initComponents();
-        controller = new VehiculosController(this);
+        controller = new VehiculosController();
         this.mostrarTodo();
         hl = new Hilo(this);
         hilo = new Thread(hl);
@@ -384,6 +384,10 @@ public class FrmVehiculos extends javax.swing.JFrame {
 
         } else {
             controller.delete(txtPlaca.getText());
+            boolean b = controller.delete(txtPlaca.getText());
+            if (b) {
+                JOptionPane.showMessageDialog(this, "Se eliminó el vehiculo");
+            }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 

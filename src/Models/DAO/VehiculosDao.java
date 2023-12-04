@@ -44,13 +44,14 @@ public class VehiculosDao implements CRUD<VehiculosDto> {
                 String name = bd.getData().getString(6);
                 int año = bd.getData().getInt(7);
                 VehiculosDto dto = new VehiculosDto(numplaca, marc, mod, fechaIns, idP, name, año);
+                return dto;
             } else {
                 return null;
             }
         } catch (SQLException ex) {
             return null;
         }
-        return null;
+
     }
 
     @Override
@@ -99,8 +100,10 @@ public class VehiculosDao implements CRUD<VehiculosDto> {
             bd.createStatement("{CALL DeleteVehiculo(?)}");
             bd.set(1, id);
             bd.execute(false);
+            System.out.println("dao delete si");
             return true;
         } else {
+            System.out.println("dao delete no");
             return false;
         }
     }

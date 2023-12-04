@@ -15,12 +15,12 @@ public class Cita {
     private String placa;
     private boolean estado;
 
-    public Cita(int id, Date fecha, Time hora, String placa, boolean estado) {
+    public Cita(int id, Date fecha, Time hora, String placa) {
         this.id = id;
         this.fecha = fecha;
         this.hora = hora;
         this.placa = placa;
-        this.estado = estado;
+        this.estado = true;
     }
     
     public int getId() {

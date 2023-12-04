@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class VehiculosController implements CRUD<Vehiculo> {
 
     private VehiculosDao dao;
-    private FrmVehiculos frm;
 
     @Override
 
@@ -27,8 +26,7 @@ public class VehiculosController implements CRUD<Vehiculo> {
         }
     }
 
-    public VehiculosController(FrmVehiculos view) {
-        this.frm = view;
+    public VehiculosController() {
         dao = new VehiculosDao();
     }
 
@@ -71,16 +69,8 @@ public class VehiculosController implements CRUD<Vehiculo> {
 
     @Override
     public boolean delete(String id) {
-        if(dao.read(id)!=null){
             dao.delete(id);
-            frm.msj("Se eliminó el vehiculo", 1);
-            return true;
-        }else{
-            frm.msj("No se encontró el vehiculo", 2);
-            return false; 
-            }
-            
+            return true;            
     }
     
-
 }

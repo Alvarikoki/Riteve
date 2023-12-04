@@ -77,7 +77,7 @@ public class TecnicosDao implements CRUD<TecnicoDto>{
 
     @Override
     public boolean update(TecnicoDto obj) {
-        if (this.read(obj.getId()) != null) {
+         if (this.read(obj.getId()) != null) {
         DaoBD bd = new DaoBD();
         bd.createStatement("{CALL UpdateTecnico(?,?,?,?,?)}");
         bd.set(1, obj.getId());

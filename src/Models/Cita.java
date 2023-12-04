@@ -5,24 +5,24 @@ package Models;
  * @author maryc
  */
 import java.sql.Date;
+import java.sql.Time;
 
-public class Cita implements StatusControl {
+public class Cita {
 
     private int id;
     private Date fecha;
-    private String hora;
-    private Vehiculo vehiculo;
-    private boolean activate;
-    private boolean desactivate;
+    private Time hora;
+    private String placa;
+    private boolean estado;
 
-    public Cita(int id, Date fecha, String hora, Vehiculo vehiculo, boolean activate) {
+    public Cita(int id, Date fecha, Time hora, String placa, boolean estado) {
         this.id = id;
         this.fecha = fecha;
         this.hora = hora;
-        this.vehiculo = vehiculo;
-        this.activate = activate;
+        this.placa = placa;
+        this.estado = estado;
     }
-
+    
     public int getId() {
         return id;
     }
@@ -39,37 +39,28 @@ public class Cita implements StatusControl {
         this.fecha = fecha;
     }
 
-    public String getHora() {
+    public Time getHora() {
         return hora;
     }
 
-    public void setHora(String hora) {
+    public void setHora(Time hora) {
         this.hora = hora;
     }
 
-    public Vehiculo getVehiculo() {
-        return vehiculo;
+    public String getPlaca() {
+        return placa;
     }
 
-    public void setVehiculo(Vehiculo vehiculo) {
-        this.vehiculo = vehiculo;
+    public void setPlaca(String placa) {
+        this.placa = placa;
     }
 
-    public boolean isActivate() {
-        return activate;
+    public boolean getEstado() {
+        return estado;
     }
 
-    public void setActivate(boolean activate) {
-        this.activate = activate;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
-    @Override
-    public void activate() {
-        this.activate = true;
-    }
-
-    @Override
-    public void desactivate() {
-        this.desactivate = false;
-    }
 }

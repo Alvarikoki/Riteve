@@ -2,13 +2,11 @@
 package Views;
 
 import Controller.TecnicoController;
-import Models.DTO.TecnicoDto;
 import Models.Tecnico;
-import java.awt.Rectangle;
 import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
-import java.sql.Date;
 import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 

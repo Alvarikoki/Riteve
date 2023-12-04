@@ -25,6 +25,9 @@ public class TecnicoDto {
         this.password = password;
     }
     
+    public TecnicoDto(String nombre) {
+        this.nombre = nombre;
+    }
     public String getId() {
         return id;
     }

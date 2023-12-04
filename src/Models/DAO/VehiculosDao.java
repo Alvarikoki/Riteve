@@ -33,7 +33,7 @@ public class VehiculosDao implements CRUD<VehiculosDto> {
         DaoBD bd = new DaoBD();
         bd.createStatement("{CALL SelectVehiculo(?)}");
         bd.set(1, id);
-        bd.execute(true);
+        bd.execute(true); 
         try {
             if (bd.getData().next()) {
                 String numplaca = bd.getData().getString(1);
@@ -94,13 +94,13 @@ public class VehiculosDao implements CRUD<VehiculosDto> {
 
     @Override
     public boolean delete(String id) {
-             if(this.read(id)!=null){
-        DaoBD bd = new DaoBD();
-        bd.createStatement("{CALL DeleteVehiculo(?)}");
-        bd.set(1, id);
-        bd.execute(false);
-        return true;
-        }else{
+        if (this.read(id) != null) {
+            DaoBD bd = new DaoBD();
+            bd.createStatement("{CALL DeleteVehiculo(?)}");
+            bd.set(1, id);
+            bd.execute(false);
+            return true;
+        } else {
             return false;
         }
     }

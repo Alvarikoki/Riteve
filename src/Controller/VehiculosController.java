@@ -1,5 +1,4 @@
 package Controller;
-
 import Models.DAO.VehiculosDao;
 import Models.DTO.VehiculosDto;
 import Models.Vehiculo;
@@ -16,7 +15,6 @@ public class VehiculosController implements CRUD<Vehiculo> {
     private FrmVehiculos frm;
 
     @Override
-
     public boolean add(Vehiculo obj) {
         if (dao.read(obj.getIdDueño()) == null) {
             VehiculosDto dto = new VehiculosDto(obj.getPlaca(), obj.getMarca(), obj.getModelo(), obj.getFechaInscripcion(), obj.getIdDueño(), obj.getNombreDueño(), obj.getAño());
@@ -71,16 +69,15 @@ public class VehiculosController implements CRUD<Vehiculo> {
 
     @Override
     public boolean delete(String id) {
-            if(dao.read(id)!=null){
-            if( (this.readAll().size())>1){
+        if(dao.read(id)!=null){
             dao.delete(id);
+            frm.msj("Se eliminó el vehiculo", 1);
             return true;
-            }else{
-                return false;
-            }
         }else{
-            return false;
-        }
+            frm.msj("No se encontró el vehiculo", 2);
+            return false; 
+            }   
     }
+    
 
 }

@@ -1,11 +1,13 @@
 package Views;
 
 import Controller.VehiculosController;
+import Models.Hilo;
 
 import Models.Vehiculo;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,6 +18,9 @@ import javax.swing.table.DefaultTableModel;
 public class FrmVehiculos extends javax.swing.JFrame {
 
     private VehiculosController controller;
+    private Hilo hl;
+    private Thread hilo;
+    private FrmVehiculos frm;
 
     /**
      * Creates new form FrmVehiculos
@@ -24,6 +29,9 @@ public class FrmVehiculos extends javax.swing.JFrame {
         initComponents();
         controller = new VehiculosController(this);
         this.mostrarTodo();
+        hl = new Hilo(this);
+        hilo = new Thread(hl);
+        hilo.start();
     }
 
     public void mostrarTodo() {
@@ -52,7 +60,18 @@ public class FrmVehiculos extends javax.swing.JFrame {
         }
         tblVehiculos.setModel(model);
     }
-
+    public void llenarCampos(Vehiculo obj){
+        txtPlaca.setText(obj.getPlaca());
+        txtMarca.setText(obj.getMarca());
+        txtModelo.setText(obj.getModelo());
+        spinV.setValue(obj.getFechaInscripcion());
+        txtDueño.setText(obj.getIdDueño());
+        txtNombreDueño.setText(obj.getNombreDueño());
+        txtAño.setText(String.valueOf(obj.getAño()));
+     
+        revalidate();
+        repaint();
+    }
     public void moverArriba(int fila) {
         if (fila >= 0 && fila < tblVehiculos.getRowCount()) {
             DefaultTableModel model = (DefaultTableModel) tblVehiculos.getModel();
@@ -63,6 +82,14 @@ public class FrmVehiculos extends javax.swing.JFrame {
             model.removeRow(fila);
             model.insertRow(0, vec);
             tblVehiculos.setRowSelectionInterval(0, 0);
+        }
+    }
+
+    public void msj(String msj, int tipo) {
+        if (tipo == 1) {
+            JOptionPane.showMessageDialog(rootPane, msj, "Notificación", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, msj, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -104,9 +131,9 @@ public class FrmVehiculos extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/add.png"))); // NOI18N
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -114,50 +141,31 @@ public class FrmVehiculos extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 70, 70));
 
         txtPlaca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPlacaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 131, -1));
-        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 131, -1));
-        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 131, -1));
-        getContentPane().add(txtDueño, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 131, -1));
-        getContentPane().add(txtAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 90, 131, -1));
-        getContentPane().add(txtNombreDueño, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 90, 131, -1));
 
         spinV.setModel(new javax.swing.SpinnerDateModel());
-        getContentPane().add(spinV, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 150, -1));
 
         jLabel1.setText("Placa");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
 
         jLabel2.setText("Cedula Dueño");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, -1, -1));
 
         jLabel3.setText("Marca");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, -1, -1));
 
         jLabel4.setText("Modelo");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, -1, -1));
 
         jLabel5.setText("Fecha");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, -1));
 
         jLabel6.setText("Nombre del Dueño");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, -1, -1));
 
         jLabel7.setText("Año");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 70, -1, -1));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 63, 930, 10));
 
         jLabel8.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
         jLabel8.setText("VEHÍCULOS");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, -1));
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 930, 10));
-        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 123, 930, 10));
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/search.png"))); // NOI18N
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -165,7 +173,6 @@ public class FrmVehiculos extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, -1, 70));
 
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/update.png"))); // NOI18N
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -173,8 +180,6 @@ public class FrmVehiculos extends javax.swing.JFrame {
                 btnActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 190, -1, 70));
-        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 930, 10));
 
         tblVehiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -189,15 +194,12 @@ public class FrmVehiculos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblVehiculos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 930, 130));
-
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/escoba2.png"))); // NOI18N
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, -1, 70));
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/delete.png"))); // NOI18N
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -205,7 +207,6 @@ public class FrmVehiculos extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, -1, 70));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/cruz.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -213,7 +214,127 @@ public class FrmVehiculos extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 10, -1, -1));
+
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(350, 350, 350)
+                .addComponent(jLabel8)
+                .addGap(315, 315, 315)
+                .addComponent(jButton1))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jLabel1)
+                .addGap(252, 252, 252)
+                .addComponent(jLabel4)
+                .addGap(229, 229, 229)
+                .addComponent(jLabel6)
+                .addGap(99, 99, 99)
+                .addComponent(jLabel7))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(500, 500, 500)
+                .addComponent(jLabel2))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(220, 220, 220)
+                .addComponent(jLabel3))
+            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(txtDueño, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(txtNombreDueño, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(txtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jLabel5))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(spinV, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(190, 190, 190)
+                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(btnBuscar)
+                .addGap(36, 36, 36)
+                .addComponent(btnActualizar)
+                .addGap(36, 36, 36)
+                .addComponent(btnEliminar)
+                .addGap(36, 36, 36)
+                .addComponent(btnLimpiar)
+                .addGap(46, 46, 46)
+                .addComponent(jButton2))
+            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jButton1))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))))
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDueño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreDueño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel5)))
+                .addGap(4, 4, 4)
+                .addComponent(spinV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jButton2)))
+                .addGap(10, 10, 10)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -233,7 +354,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         if (txtPlaca.getText().isEmpty()) {
-              JOptionPane.showMessageDialog(this, "Digite la placa para buscar");
+            JOptionPane.showMessageDialog(this, "Digite la placa para buscar");
         } else {
             String pc = txtPlaca.getText();
             tblVehiculos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -245,7 +366,6 @@ public class FrmVehiculos extends javax.swing.JFrame {
                 }
             }
         }
-
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -258,14 +378,13 @@ public class FrmVehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        controller.delete(txtPlaca.getText());
-        txtPlaca.setText("");
-        txtMarca.setText("");
-        txtModelo.setText("");
-        txtDueño.setText("");
-        txtNombreDueño.setText("");
-        txtAño.setText("");
-       
+
+        if (txtPlaca.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite la placa para eliminar");
+
+        } else {
+            controller.delete(txtPlaca.getText());
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -279,6 +398,36 @@ public class FrmVehiculos extends javax.swing.JFrame {
     private void txtPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlacaActionPerformed
 
     }//GEN-LAST:event_txtPlacaActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int row = tblVehiculos.getSelectedRow();
+            if (row != -1) {
+                String placa = tblVehiculos.getValueAt(row, 0).toString();
+                String marca = tblVehiculos.getValueAt(row, 1).toString();
+                String modelo = tblVehiculos.getValueAt(row, 2).toString();
+                Object fechaObject = tblVehiculos.getValueAt(row, 3);
+                java.sql.Date fecha = null;
+                if (fechaObject instanceof java.util.Date) {
+                    java.util.Date fechaUtil = (java.util.Date) fechaObject;
+                    fecha = new java.sql.Date(fechaUtil.getTime());
+                }
+                String IdDueño="",nombreD="";
+                int año=0;
+                try{
+                 IdDueño = tblVehiculos.getValueAt(row, 4).toString();
+                 nombreD = tblVehiculos.getValueAt(row, 5).toString();
+                  año = Integer.parseInt(tblVehiculos.getValueAt(row, 6).toString());
+                }catch (Exception ex){
+                    System.out.println("ERROR CON EL CASTING");
+                }
+               //String placa, String marca, String modelo, Date fechaInscripcion, String id, String nombre, int año
+                Vehiculo vh = new Vehiculo(placa,marca,modelo,fecha,IdDueño,nombreD,año);
+                frm.llenarCampos(vh);
+                txtPlaca.setText(placa);
+                //frm.setVisible(true);
+            
+            }         
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,6 +471,7 @@ public class FrmVehiculos extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
